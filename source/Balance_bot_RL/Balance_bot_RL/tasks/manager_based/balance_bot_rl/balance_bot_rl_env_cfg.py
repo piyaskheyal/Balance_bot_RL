@@ -23,7 +23,8 @@ from . import mdp
 # Pre-defined configs
 ##
 
-from isaaclab_assets.robots.cartpole import CARTPOLE_CFG  # isort:skip
+# from isaaclab_assets.robots.cartpole import CARTPOLE_CFG  # isort:skip
+from .balance_bot import BALANCE_BOT_CFG
 
 
 ##
@@ -39,10 +40,11 @@ class BalanceBotRlSceneCfg(InteractiveSceneCfg):
     ground = AssetBaseCfg(
         prim_path="/World/ground",
         spawn=sim_utils.GroundPlaneCfg(size=(100.0, 100.0)),
+        init_state=AssetBaseCfg.InitialStateCfg(pos=(0.0, 0.0, -0.06)),
     )
 
     # robot
-    robot: ArticulationCfg = CARTPOLE_CFG.replace(prim_path="{ENV_REGEX_NS}/Robot")
+    robot: ArticulationCfg = BALANCE_BOT_CFG.replace(prim_path="{ENV_REGEX_NS}/Robot")
 
     # lights
     dome_light = AssetBaseCfg(
@@ -60,26 +62,44 @@ class BalanceBotRlSceneCfg(InteractiveSceneCfg):
 class ActionsCfg:
     """Action specifications for the MDP."""
 
-    joint_effort = mdp.JointEffortActionCfg(asset_name="robot", joint_names=["slider_to_cart"], scale=100.0)
-
-
+    joint_effort = mdp.JointEffortActionCfg(
+        asset_name="robot", 
+        joint_names=["Left_wheel_joint", "Right_wheel_joint"], 
+        scale=10.0,
+        )
+    
 @configclass
 class ObservationsCfg:
-    """Observation specifications for the MDP."""
+    """Observation specifications for the RL agent."""
 
     @configclass
     class PolicyCfg(ObsGroup):
-        """Observations for policy group."""
+        """Observations for the policy network."""
 
-        # observation terms (order preserved)
-        joint_pos_rel = ObsTerm(func=mdp.joint_pos_rel)
-        joint_vel_rel = ObsTerm(func=mdp.joint_vel_rel)
+        # 1. Robot Tilt (Projected Gravity)
+        projected_gravity = ObsTerm(
+            func=mdp.projected_gravity,
+            params={"asset_cfg": SceneEntityCfg("robot")}
+        )
 
-        def __post_init__(self) -> None:
-            self.enable_corruption = False
-            self.concatenate_terms = True
+        # 2. Joint Positions
+        joint_pos = ObsTerm(
+            func=mdp.joint_pos_rel,
+            params={"asset_cfg": SceneEntityCfg("robot")}
+        )
 
-    # observation groups
+        # 3. Joint Velocity
+        joint_vel = ObsTerm(
+            func=mdp.joint_vel_rel,
+            params={"asset_cfg": SceneEntityCfg("robot")}
+        )
+
+        # 4. Base Angular Velocity
+        base_ang_vel = ObsTerm(
+            func=mdp.base_ang_vel,
+            params={"asset_cfg": SceneEntityCfg("robot")}
+        )
+
     policy: PolicyCfg = PolicyCfg()
 
 
@@ -88,52 +108,54 @@ class EventCfg:
     """Configuration for events."""
 
     # reset
-    reset_cart_position = EventTerm(
-        func=mdp.reset_joints_by_offset,
+    reset_base = EventTerm(
+        func=mdp.reset_root_state_uniform,
         mode="reset",
         params={
-            "asset_cfg": SceneEntityCfg("robot", joint_names=["slider_to_cart"]),
-            "position_range": (-1.0, 1.0),
-            "velocity_range": (-0.5, 0.5),
+            "pose_range": {"x": (-0.5, 0.5), "y": (-0.5, 0.5), "yaw": (-3.14, 3.14)},
+            "velocity_range": {},
+            "asset_cfg": SceneEntityCfg("robot"),
         },
     )
 
-    reset_pole_position = EventTerm(
-        func=mdp.reset_joints_by_offset,
-        mode="reset",
-        params={
-            "asset_cfg": SceneEntityCfg("robot", joint_names=["cart_to_pole"]),
-            "position_range": (-0.25 * math.pi, 0.25 * math.pi),
-            "velocity_range": (-0.25 * math.pi, 0.25 * math.pi),
-        },
-    )
-
-
+    
 @configclass
 class RewardsCfg:
-    """Reward terms for the MDP."""
+    """Reward terms for the Balance Bot."""
 
     # (1) Constant running reward
-    alive = RewTerm(func=mdp.is_alive, weight=1.0)
-    # (2) Failure penalty
-    terminating = RewTerm(func=mdp.is_terminated, weight=-2.0)
-    # (3) Primary task: keep pole upright
-    pole_pos = RewTerm(
-        func=mdp.joint_pos_target_l2,
-        weight=-1.0,
-        params={"asset_cfg": SceneEntityCfg("robot", joint_names=["cart_to_pole"]), "target": 0.0},
+    alive = RewTerm(
+        func=mdp.is_alive, 
+        weight=0.1
     )
-    # (4) Shaping tasks: lower cart velocity
-    cart_vel = RewTerm(
-        func=mdp.joint_vel_l1,
-        weight=-0.01,
-        params={"asset_cfg": SceneEntityCfg("robot", joint_names=["slider_to_cart"])},
+
+    # (2) Primary task: Keep body upright (Pitch/Roll = 0)
+    upright_penalty = RewTerm(
+        func=mdp.root_tilt_l2, # This is the custom function from above
+        weight=-5.0,       # High penalty to prioritize balance over everything else
+        params={
+            "asset_cfg": SceneEntityCfg("robot") # "robot" must match the name in your SceneCfg
+        },
     )
-    # (5) Shaping tasks: lower pole angular velocity
-    pole_vel = RewTerm(
-        func=mdp.joint_vel_l1,
+
+    # (3) Penalize "Running Away"
+    lin_vel_xy = RewTerm(
+        func=mdp.base_lin_vel_xy_l2,
+        weight=-0.5,
+        params={"asset_cfg": SceneEntityCfg("robot")},
+    )
+
+    # (4) Penalize "Jitter" (The Violent Shaking)
+    action_rate = RewTerm(
+        func=mdp.action_rate_l2,
+        weight=-0.1, # Critical for stopping vibration
+    )
+
+    # (5) Penalize High Wheel Speed
+    joint_vel = RewTerm(
+        func=mdp.joint_vel_l2,
         weight=-0.005,
-        params={"asset_cfg": SceneEntityCfg("robot", joint_names=["cart_to_pole"])},
+        params={"asset_cfg": SceneEntityCfg("robot")},
     )
 
 
@@ -143,10 +165,14 @@ class TerminationsCfg:
 
     # (1) Time out
     time_out = DoneTerm(func=mdp.time_out, time_out=True)
-    # (2) Cart out of bounds
-    cart_out_of_bounds = DoneTerm(
-        func=mdp.joint_pos_out_of_manual_limit,
-        params={"asset_cfg": SceneEntityCfg("robot", joint_names=["slider_to_cart"]), "bounds": (-3.0, 3.0)},
+
+    # (2) Tilt Limit (70 degrees)
+    bad_tilt = DoneTerm(
+        func=mdp.bad_orientation,
+        params={
+            "asset_cfg": SceneEntityCfg("robot"), 
+            "limit_angle_deg": 70.0  # The angle you requested
+        },
     )
 
 
@@ -158,7 +184,7 @@ class TerminationsCfg:
 @configclass
 class BalanceBotRlEnvCfg(ManagerBasedRLEnvCfg):
     # Scene settings
-    scene: BalanceBotRlSceneCfg = BalanceBotRlSceneCfg(num_envs=4096, env_spacing=4.0)
+    scene: BalanceBotRlSceneCfg = BalanceBotRlSceneCfg(num_envs=4096, env_spacing=1.0)
     # Basic settings
     observations: ObservationsCfg = ObservationsCfg()
     actions: ActionsCfg = ActionsCfg()
@@ -172,9 +198,9 @@ class BalanceBotRlEnvCfg(ManagerBasedRLEnvCfg):
         """Post initialization."""
         # general settings
         self.decimation = 2
-        self.episode_length_s = 5
+        self.episode_length_s = 15
         # viewer settings
-        self.viewer.eye = (8.0, 0.0, 5.0)
+        self.viewer.eye = (8.0, 0.0, 1.0)
         # simulation settings
         self.sim.dt = 1 / 120
         self.sim.render_interval = self.decimation
