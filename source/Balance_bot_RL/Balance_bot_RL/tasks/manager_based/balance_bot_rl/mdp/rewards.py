@@ -59,25 +59,6 @@ def bad_orientation(env: ManagerBasedRLEnv, asset_cfg: SceneEntityCfg, limit_ang
     # 4. Check if we violated the threshold
     return proj_grav_z > threshold
 
-# 1. Linear Velocity Penalty (XY only)
-def base_lin_vel_xy_l2(env: ManagerBasedRLEnv, asset_cfg: SceneEntityCfg) -> torch.Tensor:
-    """
-    Penalize movement in the X and Y directions (World Frame).
-    We ignore Z (index 2) because we don't want to punish the robot for moving up/down 
-    (which happens naturally as it balances).
-    """
-    # Get the robot
-    asset: Articulation = env.scene[asset_cfg.name]
-    
-    # Get linear velocity of the root in world frame
-    root_vel = asset.data.root_lin_vel_w
-    
-    # Slice to keep only X and Y (indices 0 and 1)
-    vel_xy = root_vel[:, :2]
-    
-    # Calculate Squared L2 norm: x^2 + y^2
-    return torch.sum(torch.square(vel_xy), dim=1)
-
 
 # 2. Action Rate Penalty
 def action_rate_l2(env: ManagerBasedRLEnv) -> torch.Tensor:
@@ -110,3 +91,34 @@ def joint_vel_l2(env: ManagerBasedRLEnv, asset_cfg: SceneEntityCfg) -> torch.Ten
     
     # Return squared sum of all joint velocities
     return torch.sum(torch.square(j_vel), dim=1)
+
+# In mdp.py
+
+def track_lin_vel_xy_l2(env: ManagerBasedRLEnv, asset_cfg: SceneEntityCfg) -> torch.Tensor:
+    """Penalize error between Desired Linear Velocity and Actual Linear Velocity."""
+    # 1. Get Actual Velocity in BODY FRAME (b)
+    asset: Articulation = env.scene[asset_cfg.name]
+    vel_b = asset.data.root_lin_vel_b[:, :2]  # Keep X and Y
+    
+    # 2. Get Desired Velocity (The Command)
+    # The command is stored as [v_x, v_y, w_z]
+    command = env.command_manager.get_command("base_velocity")
+    target_vel_xy = command[:, :2] # Keep X and Y
+    
+    # 3. Calculate Error
+    error = vel_b - target_vel_xy
+    return torch.sum(torch.square(error), dim=1)
+
+
+def track_ang_vel_z_l2(env: ManagerBasedRLEnv, asset_cfg: SceneEntityCfg) -> torch.Tensor:
+    """Penalize error between Desired Turning Speed and Actual Turning Speed."""
+    # 1. Get Actual Angular Velocity (Z-axis only)
+    asset: Articulation = env.scene[asset_cfg.name]
+    ang_vel_z = asset.data.root_ang_vel_b[:, 2]
+    
+    # 2. Get Desired Angular Velocity
+    # Index 2 of the command is the turning speed (yaw rate)
+    target_ang_vel = env.command_manager.get_command("base_velocity")[:, 2]
+    
+    # 3. Calculate Error
+    return torch.square(ang_vel_z - target_ang_vel)

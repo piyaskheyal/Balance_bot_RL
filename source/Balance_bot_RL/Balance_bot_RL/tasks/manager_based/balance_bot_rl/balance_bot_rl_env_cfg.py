@@ -15,6 +15,7 @@ from isaaclab.managers import RewardTermCfg as RewTerm
 from isaaclab.managers import SceneEntityCfg
 from isaaclab.managers import TerminationTermCfg as DoneTerm
 from isaaclab.scene import InteractiveSceneCfg
+from isaaclab.managers import CommandTermCfg as CmdTerm
 from isaaclab.utils import configclass
 
 from . import mdp
@@ -39,7 +40,15 @@ class BalanceBotRlSceneCfg(InteractiveSceneCfg):
     # ground plane
     ground = AssetBaseCfg(
         prim_path="/World/ground",
-        spawn=sim_utils.GroundPlaneCfg(size=(100.0, 100.0)),
+        spawn=sim_utils.GroundPlaneCfg(
+            size=(100.0, 100.0),
+            physics_material=sim_utils.RigidBodyMaterialCfg(
+                static_friction=0.85,  # Grip when starting from stop
+                dynamic_friction=0.80, # Grip when already moving
+                friction_combine_mode="multiply", # Intelligent combining
+                restitution=0.0,      # 0.0 means "no bouncing"
+            ),
+        ),
         init_state=AssetBaseCfg.InitialStateCfg(pos=(0.0, 0.0, -0.06)),
     )
 
@@ -56,6 +65,26 @@ class BalanceBotRlSceneCfg(InteractiveSceneCfg):
 ##
 # MDP settings
 ##
+
+@configclass
+class CommandsCfg:
+    """Command specifications for the RL agent."""
+
+    # Instead of defining a generic CmdTerm with func=..., 
+    # we use the specific Config class provided by Isaac Lab.
+    base_velocity = mdp.UniformVelocityCommandCfg(
+        asset_name="robot",
+        resampling_time_range=(0.0, 5.0),
+        debug_vis=True,
+        
+        # The ranges are defined inside a nested "Ranges" class or dict
+        ranges=mdp.UniformVelocityCommandCfg.Ranges(
+            lin_vel_x=(-1.0, 1.0), 
+            lin_vel_y=(0.0, 0.0),   # ZERO for two-wheeled robots
+            ang_vel_z=(-1.0, 1.0),
+            heading=(-3.14, 3.14),
+        ),
+    )
 
 
 @configclass
@@ -99,6 +128,12 @@ class ObservationsCfg:
             func=mdp.base_ang_vel,
             params={"asset_cfg": SceneEntityCfg("robot")}
         )
+        
+        # 5. Target Velocity Command
+        velocity_command = ObsTerm(
+            func=mdp.generated_commands, 
+            params={"command_name": "base_velocity"}
+        )
 
     policy: PolicyCfg = PolicyCfg()
 
@@ -126,36 +161,37 @@ class RewardsCfg:
     # (1) Constant running reward
     alive = RewTerm(
         func=mdp.is_alive, 
-        weight=0.1
+        weight=1.0 # Increased slightly to encourage long episodes
     )
 
-    # (2) Primary task: Keep body upright (Pitch/Roll = 0)
+    # (2) Upright Penalty
+    # We relax this slightly so the robot feels free to lean into the run.
     upright_penalty = RewTerm(
-        func=mdp.root_tilt_l2, # This is the custom function from above
-        weight=-5.0,       # High penalty to prioritize balance over everything else
-        params={
-            "asset_cfg": SceneEntityCfg("robot") # "robot" must match the name in your SceneCfg
-        },
+        func=mdp.root_tilt_l2, 
+        weight=-2.0, 
+        params={"asset_cfg": SceneEntityCfg("robot")},
     )
 
-    # (3) Penalize "Running Away"
-    lin_vel_xy = RewTerm(
-        func=mdp.base_lin_vel_xy_l2,
+    # (3) Velocity Tracking
+    # Logic: If I command 1.0 m/s and you go 1.0 m/s, penalty is 0.
+    velocity_tracking = RewTerm(
+        func=mdp.track_lin_vel_xy_l2,
+        weight=-1.0, # Strong incentive to match speed
+        params={"asset_cfg": SceneEntityCfg("robot")},
+    )
+    
+    # (4) Turn Tracking (Steering) <--- NEW
+    # Logic: If I command "Turn Left", you must turn left.
+    turn_tracking = RewTerm(
+        func=mdp.track_ang_vel_z_l2,
         weight=-0.5,
         params={"asset_cfg": SceneEntityCfg("robot")},
     )
 
-    # (4) Penalize "Jitter" (The Violent Shaking)
+    # (5) Smoothness (Anti-Jitter)
     action_rate = RewTerm(
         func=mdp.action_rate_l2,
-        weight=-0.1, # Critical for stopping vibration
-    )
-
-    # (5) Penalize High Wheel Speed
-    joint_vel = RewTerm(
-        func=mdp.joint_vel_l2,
-        weight=-0.005,
-        params={"asset_cfg": SceneEntityCfg("robot")},
+        weight=-0.05, # Tuned down slightly to allow quick reactions
     )
 
 
@@ -192,6 +228,7 @@ class BalanceBotRlEnvCfg(ManagerBasedRLEnvCfg):
     # MDP settings
     rewards: RewardsCfg = RewardsCfg()
     terminations: TerminationsCfg = TerminationsCfg()
+    commands: CommandsCfg = CommandsCfg()
 
     # Post initialization
     def __post_init__(self) -> None:
