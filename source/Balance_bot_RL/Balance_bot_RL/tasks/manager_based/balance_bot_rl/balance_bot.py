@@ -17,7 +17,7 @@ from isaaclab.utils.assets import ISAACLAB_NUCLEUS_DIR
 
 BALANCE_BOT_CFG = ArticulationCfg(
     spawn=sim_utils.UsdFileCfg(
-        usd_path=f"balance_bot/Balance_bot_asm.usd",
+        usd_path=f"BB/bb.usd",
         rigid_props=sim_utils.RigidBodyPropertiesCfg(
             rigid_body_enabled=True,
             max_linear_velocity=1000.0,
@@ -41,7 +41,7 @@ BALANCE_BOT_CFG = ArticulationCfg(
             joint_names_expr=["Left_wheel_joint", "Right_wheel_joint"],
             effort_limit_sim=400.0,
             stiffness=0.0,
-            damping=10.0,
+            damping=0.0,
         ),
     },
 )

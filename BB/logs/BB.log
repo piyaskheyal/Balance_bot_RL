@@ -1,0 +1,411 @@
+21:50:974 | INFO | connect:__init__:182 | Onshape API initialized with env file: /home/kheyal/dev/robotics/onshape_urdf/.env
+21:50:975 | DEBUG | connect:make_nonce:124 | nonce created: BTyeAxHt63bo4z2tM72dd7Yue
+21:50:975 | DEBUG | connect:_make_auth:1146 | query: includeMateFeatures=true&includeMateConnectors=true&includeNonSolids=false&configuration=default, hmac_str: b'get\nbtyeaxht63bo4z2tm72dd7yue\nthu, 04 dec 2025 15:50:35 gmt\napplication/json\n/api/assemblies/d/6f1cac2e0829bc5d028e9456/w/5dc6e1187c405df5f668c03b/e/a6ad1e84ceeaa58648a3c17b\nincludematefeatures=true&includemateconnectors=true&includenonsolids=false&configuration=default\n', signature: b'KnqRpc3SRlqhfhhXnDaOeD01aFhzSOpBHxHH4f9mKfI=', auth: On on_2DbHlHYJohsdc6epWuAu9:HmacSHA256:KnqRpc3SRlqhfhhXnDaOeD01aFhzSOpBHxHH4f9mKfI=
+21:50:975 | DEBUG | connect:request:999 | Request body: None
+21:50:975 | DEBUG | connect:request:1000 | Request headers: {'Content-Type': 'application/json', 'Date': 'Thu, 04 Dec 2025 15:50:35 GMT', 'On-Nonce': 'BTyeAxHt63bo4z2tM72dd7Yue', 'Authorization': 'On on_2DbHlHYJohsdc6epWuAu9:HmacSHA256:KnqRpc3SRlqhfhhXnDaOeD01aFhzSOpBHxHH4f9mKfI=', 'User-Agent': 'Onshape Python Sample App', 'Accept': 'application/json'}
+21:50:975 | DEBUG | connect:request:1001 | Request URL: https://cad.onshape.com/api/assemblies/d/6f1cac2e0829bc5d028e9456/w/5dc6e1187c405df5f668c03b/e/a6ad1e84ceeaa58648a3c17b?includeMateFeatures=true&includeMateConnectors=true&includeNonSolids=false&configuration=default
+21:50:657 | DEBUG | connect:_log_response:1104 | Request succeeded, details: {
+  "rootAssembly" : {
+    "occurrences" : [ {
+      "transform" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
+      "fixed" : false,
+      "hidden" : false,
+      "path" : [ "M7Wqv9x3Os5vAVgRu" ]
+    }, {
+      "transform" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
+      "fixed" : false,
+      "hidden" : false,
+      "path" : [ "McILgAOGgx7iIgo60" ]
+    }, {
+      "transform" : [ 1.0, 0.0, 0.0, 0.048, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, -1.734723475976807E-18, 0.0, 0.0, 0.0, 1.0 ],
+      "fixed" : false,
+      "hidden" : false,
+      "path" : [ "Mfe4gr+wDV72CXD0L" ]
+    } ],
+    "patterns" : [ ],
+    "features" : [ {
+      "id" : "MAWgqtYN5P3iL2KoQ",
+      "suppressed" : false,
+      "featureType" : "mate",
+      "featureData" : {
+        "mateType" : "REVOLUTE",
+        "matedEntities" : [ {
+          "matedOccurrence" : [ "McILgAOGgx7iIgo60" ],
+          "matedCS" : {
+            "xAxis" : [ 0.0, 1.0, 0.0 ],
+            "yAxis" : [ 0.0, 0.0, 1.0 ],
+            "zAxis" : [ 1.0, 0.0, 0.0 ],
+            "origin" : [ 0.08, 1.734723475976807E-18, 0.010000000000000002 ]
+          }
+        }, {
+          "matedOccurrence" : [ "M7Wqv9x3Os5vAVgRu" ],
+          "matedCS" : {
+            "xAxis" : [ 0.0, 1.0, 0.0 ],
+            "yAxis" : [ 0.0, 0.0, 1.0 ],
+            "zAxis" : [ 1.0, 0.0, 0.0 ],
+            "origin" : [ 0.08, 8.673617379884035E-19, 0.01 ]
+          }
+        } ],
+        "name" : "Left_wheel_joint"
+      }
+    }, {
+      "id" : "MwlKLYqrcK9XFG9Fu",
+      "suppressed" : false,
+      "featureType" : "mate",
+      "featureData" : {
+        "mateType" : "REVOLUTE",
+        "matedEntities" : [ {
+          "matedOccurrence" : [ "Mfe4gr+wDV72CXD0L" ],
+          "matedCS" : {
+            "xAxis" : [ 0.0, 1.0, 0.0 ],
+            "yAxis" : [ 0.0, 0.0, -1.0 ],
+            "zAxis" : [ -1.0, 0.0, 0.0 ],
+            "origin" : [ -0.128, 1.734723475976807E-18, 0.010000000000000002 ]
+          }
+        }, {
+          "matedOccurrence" : [ "M7Wqv9x3Os5vAVgRu" ],
+          "matedCS" : {
+            "xAxis" : [ 0.0, 1.0, 0.0 ],
+            "yAxis" : [ 0.0, 0.0, -1.0 ],
+            "zAxis" : [ -1.0, 0.0, 0.0 ],
+            "origin" : [ -0.08, 8.673617379884035E-19, 0.01 ]
+          }
+        } ],
+        "name" : "Right_wheel_joint"
+      }
+    } ],
+    "instances" : [ {
+      "isStandardContent" : false,
+      "id" : "M7Wqv9x3Os5vAVgRu",
+      "type" : "Part",
+      "name" : "Base <1>",
+      "suppressed" : false,
+      "partId" : "JHD",
+      "fullConfiguration" : "default",
+      "configuration" : "default",
+      "documentId" : "6f1cac2e0829bc5d028e9456",
+      "elementId" : "af0997a1303159a15d581b12",
+      "documentMicroversion" : "84b41192f486cf5514bce1e0"
+    }, {
+      "isStandardContent" : false,
+      "id" : "McILgAOGgx7iIgo60",
+      "type" : "Part",
+      "name" : "Left_wheel <1>",
+      "suppressed" : false,
+      "partId" : "JQD",
+      "fullConfiguration" : "default",
+      "configuration" : "default",
+      "documentId" : "6f1cac2e0829bc5d028e9456",
+      "elementId" : "af0997a1303159a15d581b12",
+      "documentMicroversion" : "84b41192f486cf5514bce1e0"
+    }, {
+      "isStandardContent" : false,
+      "id" : "Mfe4gr+wDV72CXD0L",
+      "type" : "Part",
+      "name" : "Right_wheel <1>",
+      "suppressed" : false,
+      "partId" : "JVD",
+      "fullConfiguration" : "default",
+      "configuration" : "default",
+      "documentId" : "6f1cac2e0829bc5d028e9456",
+      "elementId" : "af0997a1303159a15d581b12",
+      "documentMicroversion" : "84b41192f486cf5514bce1e0"
+    } ],
+    "fullConfiguration" : "default",
+    "configuration" : "default",
+    "documentId" : "6f1cac2e0829bc5d028e9456",
+    "elementId" : "a6ad1e84ceeaa58648a3c17b",
+    "documentMicroversion" : "84b41192f486cf5514bce1e0"
+  },
+  "subAssemblies" : [ ],
+  "parts" : [ {
+    "isStandardContent" : false,
+    "partId" : "JHD",
+    "bodyType" : "solid",
+    "fullConfiguration" : "default",
+    "configuration" : "default",
+    "documentId" : "6f1cac2e0829bc5d028e9456",
+    "elementId" : "af0997a1303159a15d581b12",
+    "documentMicroversion" : "84b41192f486cf5514bce1e0"
+  }, {
+    "isStandardContent" : false,
+    "partId" : "JVD",
+    "bodyType" : "solid",
+    "fullConfiguration" : "default",
+    "configuration" : "default",
+    "documentId" : "6f1cac2e0829bc5d028e9456",
+    "elementId" : "af0997a1303159a15d581b12",
+    "documentMicroversion" : "84b41192f486cf5514bce1e0"
+  }, {
+    "isStandardContent" : false,
+    "partId" : "JQD",
+    "bodyType" : "solid",
+    "fullConfiguration" : "default",
+    "configuration" : "default",
+    "documentId" : "6f1cac2e0829bc5d028e9456",
+    "elementId" : "af0997a1303159a15d581b12",
+    "documentMicroversion" : "84b41192f486cf5514bce1e0"
+  } ],
+  "partStudioFeatures" : [ ]
+}
+21:50:658 | DEBUG | connect:make_nonce:124 | nonce created: 3JbA2Y8aSroiJyTutJ0JFhmy1
+21:50:659 | DEBUG | connect:_make_auth:1146 | query: inferMetadataOwner=false&includeComputedProperties=false&includeComputedAssemblyProperties=false&thumbnail=false&configuration=default, hmac_str: b'get\n3jba2y8asroijytutj0jfhmy1\nthu, 04 dec 2025 15:50:36 gmt\napplication/json\n/api/metadata/d/6f1cac2e0829bc5d028e9456/w/5dc6e1187c405df5f668c03b/e/a6ad1e84ceeaa58648a3c17b\ninfermetadataowner=false&includecomputedproperties=false&includecomputedassemblyproperties=false&thumbnail=false&configuration=default\n', signature: b'ITW82A7iR0dWX5mtmDiWzH4dYqewni9y99MFyw/wbAw=', auth: On on_2DbHlHYJohsdc6epWuAu9:HmacSHA256:ITW82A7iR0dWX5mtmDiWzH4dYqewni9y99MFyw/wbAw=
+21:50:659 | DEBUG | connect:request:999 | Request body: None
+21:50:659 | DEBUG | connect:request:1000 | Request headers: {'Content-Type': 'application/json', 'Date': 'Thu, 04 Dec 2025 15:50:36 GMT', 'On-Nonce': '3JbA2Y8aSroiJyTutJ0JFhmy1', 'Authorization': 'On on_2DbHlHYJohsdc6epWuAu9:HmacSHA256:ITW82A7iR0dWX5mtmDiWzH4dYqewni9y99MFyw/wbAw=', 'User-Agent': 'Onshape Python Sample App', 'Accept': 'application/json'}
+21:50:659 | DEBUG | connect:request:1001 | Request URL: https://cad.onshape.com/api/metadata/d/6f1cac2e0829bc5d028e9456/w/5dc6e1187c405df5f668c03b/e/a6ad1e84ceeaa58648a3c17b?inferMetadataOwner=false&includeComputedProperties=false&includeComputedAssemblyProperties=false&thumbnail=false&configuration=default
+21:50:520 | DEBUG | connect:make_nonce:124 | nonce created: xqbMansfk1uzaSLlsoabk3m2G
+21:50:520 | DEBUG | connect:_make_auth:1146 | query: , hmac_str: b'get\nxqbmansfk1uzasllsoabk3m2g\nthu, 04 dec 2025 15:50:37 gmt\napplication/json\n/api/documents/6f1cac2e0829bc5d028e9456\n\n', signature: b'Y2C0vfkTYUYi4W4a0KB7V2r2ksJ+arIucGsn1lm1VDc=', auth: On on_2DbHlHYJohsdc6epWuAu9:HmacSHA256:Y2C0vfkTYUYi4W4a0KB7V2r2ksJ+arIucGsn1lm1VDc=
+21:50:520 | DEBUG | connect:request:999 | Request body: None
+21:50:520 | DEBUG | connect:request:1000 | Request headers: {'Content-Type': 'application/json', 'Date': 'Thu, 04 Dec 2025 15:50:37 GMT', 'On-Nonce': 'xqbMansfk1uzaSLlsoabk3m2G', 'Authorization': 'On on_2DbHlHYJohsdc6epWuAu9:HmacSHA256:Y2C0vfkTYUYi4W4a0KB7V2r2ksJ+arIucGsn1lm1VDc=', 'User-Agent': 'Onshape Python Sample App', 'Accept': 'application/json'}
+21:50:520 | DEBUG | connect:request:1001 | Request URL: https://cad.onshape.com/api/documents/6f1cac2e0829bc5d028e9456?
+21:50:039 | DEBUG | connect:_log_response:1104 | Request succeeded, details: {
+  "jsonType" : "document",
+  "documentThumbnailElementId" : "",
+  "isUpgradedToLatestVersion" : true,
+  "requireApprovedDrawingTemplatesPreference" : false,
+  "notes" : null,
+  "public" : true,
+  "permission" : "OWNER",
+  "defaultElementId" : "a6ad1e84ceeaa58648a3c17b",
+  "recentVersion" : null,
+  "hasRelevantInsertables" : false,
+  "canUnshare" : false,
+  "userAccountLimitsBreached" : false,
+  "supportTeamUserAndShared" : false,
+  "isUsingManagedWorkflow" : false,
+  "likedByCurrentUser" : false,
+  "defaultVersionGraphMode" : "ALL_BRANCHES",
+  "defaultVersionGraphShowMerges" : true,
+  "defaultVersionGraphShowAutoVersions" : true,
+  "sequence" : null,
+  "tags" : [ ],
+  "documentType" : 0,
+  "thumbnail" : {
+    "sizes" : [ {
+      "size" : "600x340",
+      "sheetName" : null,
+      "href" : "https://cad.onshape.com/api/thumbnails/d/6f1cac2e0829bc5d028e9456/w/5dc6e1187c405df5f668c03b/s/600x340?t=1764863185135",
+      "mediaType" : "image/png",
+      "uniqueId" : null,
+      "viewOrientation" : "",
+      "renderMode" : ""
+    }, {
+      "size" : "300x170",
+      "sheetName" : null,
+      "href" : "https://cad.onshape.com/api/thumbnails/d/6f1cac2e0829bc5d028e9456/w/5dc6e1187c405df5f668c03b/s/300x170?t=1764863185135",
+      "mediaType" : "image/png",
+      "uniqueId" : null,
+      "viewOrientation" : "",
+      "renderMode" : ""
+    }, {
+      "size" : "70x40",
+      "sheetName" : null,
+      "href" : "https://cad.onshape.com/api/thumbnails/d/6f1cac2e0829bc5d028e9456/w/5dc6e1187c405df5f668c03b/s/70x40?t=1764863185135",
+      "mediaType" : "image/png",
+      "uniqueId" : null,
+      "viewOrientation" : "",
+      "renderMode" : ""
+    }, {
+      "size" : "300x300",
+      "sheetName" : null,
+      "href" : "https://cad.onshape.com/api/thumbnails/d/6f1cac2e0829bc5d028e9456/w/5dc6e1187c405df5f668c03b/s/300x300?t=1764863185135",
+      "mediaType" : "image/png",
+      "uniqueId" : null,
+      "viewOrientation" : "",
+      "renderMode" : ""
+    } ],
+    "secondarySizes" : null,
+    "id" : null,
+    "href" : "https://cad.onshape.com/api/thumbnails/d/6f1cac2e0829bc5d028e9456/w/5dc6e1187c405df5f668c03b?t=1764863185135"
+  },
+  "parentId" : "08327be176484b41fc89adaf",
+  "projectId" : null,
+  "anonymousAllowsExport" : false,
+  "defaultWorkspace" : {
+    "state" : "ACTIVE",
+    "canDelete" : false,
+    "protectionRule" : "OPEN",
+    "isReadOnly" : false,
+    "parent" : "cfea2d2d4b21d99dfe985ddd",
+    "type" : "workspace",
+    "creator" : {
+      "jsonType" : "user-summary",
+      "state" : 1,
+      "isOnshapeSupport" : false,
+      "image" : "https://cad.onshape.com/api/profile/7deb05059cd0aeb712ae22cb38f5aa2310d366354e14ace22a921660de89e089.png",
+      "name" : "Piyas Ahmed Kheyal",
+      "id" : "69286f77b9944045fc500e5a",
+      "href" : "https://cad.onshape.com/api/v1/users/69286f77b9944045fc500e5a"
+    },
+    "lastModifier" : {
+      "jsonType" : "user-summary",
+      "state" : 1,
+      "isOnshapeSupport" : false,
+      "image" : "https://cad.onshape.com/api/profile/7deb05059cd0aeb712ae22cb38f5aa2310d366354e14ace22a921660de89e089.png",
+      "name" : "Piyas Ahmed Kheyal",
+      "id" : "69286f77b9944045fc500e5a",
+      "href" : "https://cad.onshape.com/api/v1/users/69286f77b9944045fc500e5a"
+    },
+    "description" : "",
+    "modifiedAt" : "2025-12-04T15:39:09.438+00:00",
+    "thumbnail" : null,
+    "documentId" : "6f1cac2e0829bc5d028e9456",
+    "createdAt" : "2025-12-01T06:54:13.158+00:00",
+    "microversion" : "9f88548256c81be38f4a72d6",
+    "parents" : null,
+    "overrideDate" : "2025-12-04T15:39:09.438+00:00",
+    "name" : "Main",
+    "id" : "5dc6e1187c405df5f668c03b",
+    "href" : "https://cad.onshape.com/api/v1/documents/d/6f1cac2e0829bc5d028e9456/workspaces/5dc6e1187c405df5f668c03b"
+  },
+  "permissionSet" : [ "DELETE", "OWNER", "LINK", "COMMENT", "RESHARE", "COPY", "READ", "EXPORT", "WRITE" ],
+  "trash" : false,
+  "totalWorkspacesUpdating" : 0,
+  "totalWorkspacesScheduledForUpdate" : 0,
+  "documentLabels" : [ ],
+  "numberOfTimesReferenced" : 0,
+  "numberOfTimesCopied" : 0,
+  "likes" : 0,
+  "publishedVersionId" : null,
+  "notRevisionManaged" : false,
+  "forceExportRules" : false,
+  "createdWithEducationPlan" : false,
+  "anonymousAccessAllowed" : false,
+  "trashedAt" : null,
+  "isOrphaned" : false,
+  "hasReleaseRevisionableObjects" : false,
+  "owner" : {
+    "type" : 0,
+    "isEnterpriseOwnedResource" : false,
+    "image" : "https://cad.onshape.com/api/profile/7deb05059cd0aeb712ae22cb38f5aa2310d366354e14ace22a921660de89e089.png",
+    "name" : "Piyas Ahmed Kheyal",
+    "id" : "69286f77b9944045fc500e5a",
+    "href" : "https://cad.onshape.com/api/v1/users/69286f77b9944045fc500e5a"
+  },
+  "connectionName" : "",
+  "isMutable" : false,
+  "isContainer" : false,
+  "canMove" : true,
+  "unparentHref" : "https://cad.onshape.com/api/globaltreenodes/document/6f1cac2e0829bc5d028e9456/parentInfo",
+  "isExternalConnectionResource" : false,
+  "description" : null,
+  "modifiedAt" : "2025-12-04T15:36:21.577+00:00",
+  "createdAt" : "2025-12-01T06:54:10.590+00:00",
+  "createdBy" : {
+    "jsonType" : "user-summary",
+    "state" : 1,
+    "isOnshapeSupport" : false,
+    "image" : "https://cad.onshape.com/api/profile/7deb05059cd0aeb712ae22cb38f5aa2310d366354e14ace22a921660de89e089.png",
+    "name" : "Piyas Ahmed Kheyal",
+    "id" : "69286f77b9944045fc500e5a",
+    "href" : "https://cad.onshape.com/api/v1/users/69286f77b9944045fc500e5a"
+  },
+  "modifiedBy" : {
+    "jsonType" : "user-summary",
+    "state" : 1,
+    "isOnshapeSupport" : false,
+    "image" : "https://cad.onshape.com/api/profile/7deb05059cd0aeb712ae22cb38f5aa2310d366354e14ace22a921660de89e089.png",
+    "name" : "Piyas Ahmed Kheyal",
+    "id" : "69286f77b9944045fc500e5a",
+    "href" : "https://cad.onshape.com/api/v1/users/69286f77b9944045fc500e5a"
+  },
+  "connectionNames" : null,
+  "isEnterpriseOwned" : false,
+  "resourceType" : "document",
+  "name" : "balance_bot",
+  "id" : "6f1cac2e0829bc5d028e9456",
+  "href" : "https://cad.onshape.com/api/v1/documents/6f1cac2e0829bc5d028e9456"
+}
+21:50:041 | DEBUG | parse:_build_id_to_name_map:735 | Building instance ID to name mapping...
+21:50:041 | DEBUG | parse:_build_id_to_name_map:759 | Mapped 3 instance IDs to names
+21:50:041 | DEBUG | parse:_build_path_keys_from_occurrences:703 | Building PathKeys from occurrences...
+21:50:041 | DEBUG | parse:_build_path_keys_from_occurrences:718 | Built 3 PathKeys from 3 occurrences
+21:50:041 | INFO | parse:_populate_instances:839 | Populated 3 instances (including nested)
+21:50:041 | INFO | parse:_populate_occurrences:856 | Populated 3 occurrences
+21:50:041 | INFO | parse:_populate_subassemblies:919 | Populated 0 subassembly occurrences from 0 definitions (rigid_by_depth=0, rigid_by_features=0, max_depth=0)
+21:50:041 | INFO | parse:_populate_parts:1303 | Populated 3 parts from assembly
+21:50:041 | DEBUG | parse:_populate_mates:1078 | Populated 2 mates (root + flexible subassemblies)
+21:50:042 | DEBUG | parse:_populate_patterns:1133 | Populated 0 patterns
+21:50:042 | DEBUG | parse:_populate_from_assembly:789 | Populated CAD: 3 instances, 3 occurrences, 2 mates, 0 patterns, 3 parts
+21:50:042 | WARNING | parse:fetch_mate_limits:1422 | No client provided for fetching mate limits, skipping
+21:50:042 | INFO | parse:from_assembly:635 | Created CAD(keys=3, instances=3 (parts=3, asm=0), occurrences=3, subassemblies=0, mates=2, patterns=0, parts=3)
+21:50:042 | DEBUG | graph:_get_parts_involved_in_mates:549 | Found 3 parts to include in graph
+21:50:042 | DEBUG | graph:_add_nodes:94 | Processing 3 involved parts
+21:50:042 | DEBUG | graph:_add_nodes:109 | Added 3 nodes to graph
+21:50:042 | DEBUG | graph:_add_edges:129 | Added edge: Base_1 -> Left_wheel_1
+21:50:042 | DEBUG | graph:_add_edges:129 | Added edge: Base_1 -> Right_wheel_1
+21:50:042 | DEBUG | graph:_add_edges:133 | Added 2 edges to graph
+21:50:043 | DEBUG | graph:_find_root_node:580 | Auto-detected root node: Base_1
+21:50:043 | INFO | graph:_build_graph:302 | KinematicGraph processed: 3 nodes, 2 edges with root node: Base_1
+21:50:043 | DEBUG | parse:_fetch_mass_properties:1318 | Fetching mass properties for part: Base_1
+21:50:044 | DEBUG | parse:_fetch_mass_properties:1318 | Fetching mass properties for part: Right_wheel_1
+21:50:044 | DEBUG | parse:_fetch_mass_properties:1318 | Fetching mass properties for part: Left_wheel_1
+21:50:044 | DEBUG | connect:make_nonce:124 | nonce created: 8f2YO6BNkWnyqsi7hPuZwLKom
+21:50:045 | DEBUG | connect:_make_auth:1146 | query: useMassPropertiesOverrides=True, hmac_str: b'get\n8f2yo6bnkwnyqsi7hpuzwlkom\nthu, 04 dec 2025 15:50:38 gmt\napplication/json\n/api/parts/d/6f1cac2e0829bc5d028e9456/m/84b41192f486cf5514bce1e0/e/af0997a1303159a15d581b12/partid/jhd/massproperties\nusemasspropertiesoverrides=true\n', signature: b'XNO0pbGqZYhFb/5vqNPG/J8VHgjxjX5R26eX9Q1oKTQ=', auth: On on_2DbHlHYJohsdc6epWuAu9:HmacSHA256:XNO0pbGqZYhFb/5vqNPG/J8VHgjxjX5R26eX9Q1oKTQ=
+21:50:045 | DEBUG | connect:request:999 | Request body: None
+21:50:045 | DEBUG | connect:request:1000 | Request headers: {'Content-Type': 'application/json', 'Date': 'Thu, 04 Dec 2025 15:50:38 GMT', 'On-Nonce': '8f2YO6BNkWnyqsi7hPuZwLKom', 'Authorization': 'On on_2DbHlHYJohsdc6epWuAu9:HmacSHA256:XNO0pbGqZYhFb/5vqNPG/J8VHgjxjX5R26eX9Q1oKTQ=', 'User-Agent': 'Onshape Python Sample App', 'Accept': 'application/json'}
+21:50:045 | DEBUG | connect:request:1001 | Request URL: https://cad.onshape.com/api/parts/d/6f1cac2e0829bc5d028e9456/m/84b41192f486cf5514bce1e0/e/af0997a1303159a15d581b12/partid/JHD/massproperties?useMassPropertiesOverrides=True
+21:50:045 | DEBUG | connect:make_nonce:124 | nonce created: SFdK2DZJGfrR4186poJnUeyBw
+21:50:045 | DEBUG | connect:_make_auth:1146 | query: useMassPropertiesOverrides=True, hmac_str: b'get\nsfdk2dzjgfrr4186pojnueybw\nthu, 04 dec 2025 15:50:38 gmt\napplication/json\n/api/parts/d/6f1cac2e0829bc5d028e9456/m/84b41192f486cf5514bce1e0/e/af0997a1303159a15d581b12/partid/jvd/massproperties\nusemasspropertiesoverrides=true\n', signature: b'xwTF/fxcdk5M7M9Z3rq9teWTBOhZty7HdVeofhjCb1A=', auth: On on_2DbHlHYJohsdc6epWuAu9:HmacSHA256:xwTF/fxcdk5M7M9Z3rq9teWTBOhZty7HdVeofhjCb1A=
+21:50:045 | DEBUG | connect:request:999 | Request body: None
+21:50:046 | DEBUG | connect:request:1000 | Request headers: {'Content-Type': 'application/json', 'Date': 'Thu, 04 Dec 2025 15:50:38 GMT', 'On-Nonce': 'SFdK2DZJGfrR4186poJnUeyBw', 'Authorization': 'On on_2DbHlHYJohsdc6epWuAu9:HmacSHA256:xwTF/fxcdk5M7M9Z3rq9teWTBOhZty7HdVeofhjCb1A=', 'User-Agent': 'Onshape Python Sample App', 'Accept': 'application/json'}
+21:50:046 | DEBUG | connect:request:1001 | Request URL: https://cad.onshape.com/api/parts/d/6f1cac2e0829bc5d028e9456/m/84b41192f486cf5514bce1e0/e/af0997a1303159a15d581b12/partid/JVD/massproperties?useMassPropertiesOverrides=True
+21:50:046 | DEBUG | connect:make_nonce:124 | nonce created: 0SZA7dfQePeCpz8J6nWJGaw6Q
+21:50:046 | DEBUG | connect:_make_auth:1146 | query: useMassPropertiesOverrides=True, hmac_str: b'get\n0sza7dfqepecpz8j6nwjgaw6q\nthu, 04 dec 2025 15:50:38 gmt\napplication/json\n/api/parts/d/6f1cac2e0829bc5d028e9456/m/84b41192f486cf5514bce1e0/e/af0997a1303159a15d581b12/partid/jqd/massproperties\nusemasspropertiesoverrides=true\n', signature: b'V0TB4faq7gqoQVBYdIc6UIuUYBoKah+gefs7RXSciZg=', auth: On on_2DbHlHYJohsdc6epWuAu9:HmacSHA256:V0TB4faq7gqoQVBYdIc6UIuUYBoKah+gefs7RXSciZg=
+21:50:046 | DEBUG | connect:request:999 | Request body: None
+21:50:046 | DEBUG | connect:request:1000 | Request headers: {'Content-Type': 'application/json', 'Date': 'Thu, 04 Dec 2025 15:50:38 GMT', 'On-Nonce': '0SZA7dfQePeCpz8J6nWJGaw6Q', 'Authorization': 'On on_2DbHlHYJohsdc6epWuAu9:HmacSHA256:V0TB4faq7gqoQVBYdIc6UIuUYBoKah+gefs7RXSciZg=', 'User-Agent': 'Onshape Python Sample App', 'Accept': 'application/json'}
+21:50:046 | DEBUG | connect:request:1001 | Request URL: https://cad.onshape.com/api/parts/d/6f1cac2e0829bc5d028e9456/m/84b41192f486cf5514bce1e0/e/af0997a1303159a15d581b12/partid/JQD/massproperties?useMassPropertiesOverrides=True
+21:50:769 | INFO | robot:from_graph:633 | Processing root node: Base_1
+21:50:770 | INFO | robot:get_robot_link:170 | Creating robot link for Base_1
+21:50:770 | INFO | robot:from_graph:648 | Processing 2 edges in the kinematic graph.
+21:50:770 | INFO | robot:from_graph:654 | Processing edge: Base_1 → Left_wheel_1
+21:50:771 | INFO | robot:get_robot_joint:297 | Creating robot joint from Base_1 to Left_wheel_1
+21:50:771 | DEBUG | robot:get_robot_joint:338 | Using default limits for mate 'Left_wheel_joint': min=-6.2832, max=6.2832
+21:50:771 | INFO | robot:get_robot_link:170 | Creating robot link for Left_wheel_1
+21:50:772 | INFO | robot:from_graph:654 | Processing edge: Base_1 → Right_wheel_1
+21:50:772 | INFO | robot:get_robot_joint:297 | Creating robot joint from Base_1 to Right_wheel_1
+21:50:772 | DEBUG | robot:get_robot_joint:338 | Using default limits for mate 'Right_wheel_joint': min=-6.2832, max=6.2832
+21:50:772 | INFO | robot:get_robot_link:170 | Creating robot link for Right_wheel_1
+21:50:772 | INFO | connect:download:1309 | Downloading Base_1.stl
+21:50:773 | INFO | connect:download:1309 | Downloading Left_wheel_1.stl
+21:50:773 | INFO | connect:download:1309 | Downloading Right_wheel_1.stl
+21:50:773 | DEBUG | connect:make_nonce:124 | nonce created: 5PJ6Fcd6sM3Ypijwx7EcMGJXV
+21:50:773 | DEBUG | connect:_make_auth:1146 | query: mode=binary&grouping=True&units=meter, hmac_str: b'get\n5pj6fcd6sm3ypijwx7ecmgjxv\nthu, 04 dec 2025 15:50:38 gmt\napplication/json\n/api/parts/d/6f1cac2e0829bc5d028e9456/m/84b41192f486cf5514bce1e0/e/af0997a1303159a15d581b12/partid/jhd/stl\nmode=binary&grouping=true&units=meter\n', signature: b'zshEUg5oXIXxBvvlzKYoMkSiY2WUrZaBwIDz0xFiYWQ=', auth: On on_2DbHlHYJohsdc6epWuAu9:HmacSHA256:zshEUg5oXIXxBvvlzKYoMkSiY2WUrZaBwIDz0xFiYWQ=
+21:50:773 | DEBUG | connect:request:999 | Request body: None
+21:50:773 | DEBUG | connect:request:1000 | Request headers: {'Content-Type': 'application/json', 'Date': 'Thu, 04 Dec 2025 15:50:38 GMT', 'On-Nonce': '5PJ6Fcd6sM3Ypijwx7EcMGJXV', 'Authorization': 'On on_2DbHlHYJohsdc6epWuAu9:HmacSHA256:zshEUg5oXIXxBvvlzKYoMkSiY2WUrZaBwIDz0xFiYWQ=', 'User-Agent': 'Onshape Python Sample App', 'Accept': 'application/vnd.onshape.v1+octet-stream'}
+21:50:773 | DEBUG | connect:request:1001 | Request URL: https://cad.onshape.com/api/parts/d/6f1cac2e0829bc5d028e9456/m/84b41192f486cf5514bce1e0/e/af0997a1303159a15d581b12/partid/JHD/stl?mode=binary&grouping=True&units=meter
+21:50:774 | DEBUG | connect:make_nonce:124 | nonce created: Vm6wQKyNfS9ihvoZLylYeGBzz
+21:50:774 | DEBUG | connect:_make_auth:1146 | query: mode=binary&grouping=True&units=meter, hmac_str: b'get\nvm6wqkynfs9ihvozlylyegbzz\nthu, 04 dec 2025 15:50:38 gmt\napplication/json\n/api/parts/d/6f1cac2e0829bc5d028e9456/m/84b41192f486cf5514bce1e0/e/af0997a1303159a15d581b12/partid/jqd/stl\nmode=binary&grouping=true&units=meter\n', signature: b'TsLCbSX+6Aj74UrgVdtBgr/asMljcdHlGmsFMKw/5y0=', auth: On on_2DbHlHYJohsdc6epWuAu9:HmacSHA256:TsLCbSX+6Aj74UrgVdtBgr/asMljcdHlGmsFMKw/5y0=
+21:50:774 | DEBUG | connect:request:999 | Request body: None
+21:50:774 | DEBUG | connect:request:1000 | Request headers: {'Content-Type': 'application/json', 'Date': 'Thu, 04 Dec 2025 15:50:38 GMT', 'On-Nonce': 'Vm6wQKyNfS9ihvoZLylYeGBzz', 'Authorization': 'On on_2DbHlHYJohsdc6epWuAu9:HmacSHA256:TsLCbSX+6Aj74UrgVdtBgr/asMljcdHlGmsFMKw/5y0=', 'User-Agent': 'Onshape Python Sample App', 'Accept': 'application/vnd.onshape.v1+octet-stream'}
+21:50:774 | DEBUG | connect:request:1001 | Request URL: https://cad.onshape.com/api/parts/d/6f1cac2e0829bc5d028e9456/m/84b41192f486cf5514bce1e0/e/af0997a1303159a15d581b12/partid/JQD/stl?mode=binary&grouping=True&units=meter
+21:50:775 | DEBUG | connect:make_nonce:124 | nonce created: 2pqEWq7nFFCZIu0lNagKbIatv
+21:50:775 | DEBUG | connect:_make_auth:1146 | query: mode=binary&grouping=True&units=meter, hmac_str: b'get\n2pqewq7nffcziu0lnagkbiatv\nthu, 04 dec 2025 15:50:38 gmt\napplication/json\n/api/parts/d/6f1cac2e0829bc5d028e9456/m/84b41192f486cf5514bce1e0/e/af0997a1303159a15d581b12/partid/jvd/stl\nmode=binary&grouping=true&units=meter\n', signature: b'E2gBATNyUWBR0nYZk6yAy3MszZXqLSIsyu203ccdYRE=', auth: On on_2DbHlHYJohsdc6epWuAu9:HmacSHA256:E2gBATNyUWBR0nYZk6yAy3MszZXqLSIsyu203ccdYRE=
+21:50:775 | DEBUG | connect:request:999 | Request body: None
+21:50:775 | DEBUG | connect:request:1000 | Request headers: {'Content-Type': 'application/json', 'Date': 'Thu, 04 Dec 2025 15:50:38 GMT', 'On-Nonce': '2pqEWq7nFFCZIu0lNagKbIatv', 'Authorization': 'On on_2DbHlHYJohsdc6epWuAu9:HmacSHA256:E2gBATNyUWBR0nYZk6yAy3MszZXqLSIsyu203ccdYRE=', 'User-Agent': 'Onshape Python Sample App', 'Accept': 'application/vnd.onshape.v1+octet-stream'}
+21:50:775 | DEBUG | connect:request:1001 | Request URL: https://cad.onshape.com/api/parts/d/6f1cac2e0829bc5d028e9456/m/84b41192f486cf5514bce1e0/e/af0997a1303159a15d581b12/partid/JVD/stl?mode=binary&grouping=True&units=meter
+21:50:465 | DEBUG | connect:_handle_redirect:1084 | Request redirected to: https://cad-aps1.onshape.com/modelexport?workspaceId=5dc6e1187c405df5f668c03b&microversion=84b41192f486cf5514bce1e0&format=STL&mode=binary&grouping=true&scale=1.0&units=meter&partIds=JQD&_m=906eee15&documentId=6f1cac2e0829bc5d028e9456&elementId=af0997a1303159a15d581b12
+21:50:466 | DEBUG | connect:_handle_redirect:1084 | Request redirected to: https://cad-aps1.onshape.com/modelexport?workspaceId=5dc6e1187c405df5f668c03b&microversion=84b41192f486cf5514bce1e0&format=STL&mode=binary&grouping=true&scale=1.0&units=meter&partIds=JVD&_m=906eee15&documentId=6f1cac2e0829bc5d028e9456&elementId=af0997a1303159a15d581b12
+21:50:466 | DEBUG | connect:make_nonce:124 | nonce created: mAirfIlNRmtTuIak4QkzcT2vS
+21:50:466 | DEBUG | connect:_make_auth:1146 | query: workspaceId=5dc6e1187c405df5f668c03b&microversion=84b41192f486cf5514bce1e0&format=STL&mode=binary&grouping=true&scale=1.0&units=meter&partIds=JVD&_m=906eee15&documentId=6f1cac2e0829bc5d028e9456&elementId=af0997a1303159a15d581b12, hmac_str: b'get\nmairfilnrmttuiak4qkzct2vs\nthu, 04 dec 2025 15:50:39 gmt\napplication/json\n/modelexport\nworkspaceid=5dc6e1187c405df5f668c03b&microversion=84b41192f486cf5514bce1e0&format=stl&mode=binary&grouping=true&scale=1.0&units=meter&partids=jvd&_m=906eee15&documentid=6f1cac2e0829bc5d028e9456&elementid=af0997a1303159a15d581b12\n', signature: b'tXG67lm0ZQcmK8hsLxsCK7NfHJyBnqgFUD3hO7X5zyA=', auth: On on_2DbHlHYJohsdc6epWuAu9:HmacSHA256:tXG67lm0ZQcmK8hsLxsCK7NfHJyBnqgFUD3hO7X5zyA=
+21:50:466 | DEBUG | connect:request:999 | Request body: None
+21:50:466 | DEBUG | connect:request:1000 | Request headers: {'Content-Type': 'application/json', 'Date': 'Thu, 04 Dec 2025 15:50:39 GMT', 'On-Nonce': 'mAirfIlNRmtTuIak4QkzcT2vS', 'Authorization': 'On on_2DbHlHYJohsdc6epWuAu9:HmacSHA256:tXG67lm0ZQcmK8hsLxsCK7NfHJyBnqgFUD3hO7X5zyA=', 'User-Agent': 'Onshape Python Sample App', 'Accept': 'application/vnd.onshape.v1+octet-stream'}
+21:50:466 | DEBUG | connect:make_nonce:124 | nonce created: 7CCnlCLq60ZJVwdwb4O19E4zV
+21:50:466 | DEBUG | connect:request:1001 | Request URL: https://cad-aps1.onshape.com/modelexport?workspaceId=5dc6e1187c405df5f668c03b&microversion=84b41192f486cf5514bce1e0&format=STL&mode=binary&grouping=true&scale=1.0&units=meter&partIds=JVD&_m=906eee15&documentId=6f1cac2e0829bc5d028e9456&elementId=af0997a1303159a15d581b12
+21:50:467 | DEBUG | connect:_make_auth:1146 | query: workspaceId=5dc6e1187c405df5f668c03b&microversion=84b41192f486cf5514bce1e0&format=STL&mode=binary&grouping=true&scale=1.0&units=meter&partIds=JQD&_m=906eee15&documentId=6f1cac2e0829bc5d028e9456&elementId=af0997a1303159a15d581b12, hmac_str: b'get\n7ccnlclq60zjvwdwb4o19e4zv\nthu, 04 dec 2025 15:50:39 gmt\napplication/json\n/modelexport\nworkspaceid=5dc6e1187c405df5f668c03b&microversion=84b41192f486cf5514bce1e0&format=stl&mode=binary&grouping=true&scale=1.0&units=meter&partids=jqd&_m=906eee15&documentid=6f1cac2e0829bc5d028e9456&elementid=af0997a1303159a15d581b12\n', signature: b'ib9oCC24Y4QvzHXHoOAoLRfZMp5cMpH+CPbNYwntk9A=', auth: On on_2DbHlHYJohsdc6epWuAu9:HmacSHA256:ib9oCC24Y4QvzHXHoOAoLRfZMp5cMpH+CPbNYwntk9A=
+21:50:467 | DEBUG | connect:request:999 | Request body: None
+21:50:467 | DEBUG | connect:request:1000 | Request headers: {'Content-Type': 'application/json', 'Date': 'Thu, 04 Dec 2025 15:50:39 GMT', 'On-Nonce': '7CCnlCLq60ZJVwdwb4O19E4zV', 'Authorization': 'On on_2DbHlHYJohsdc6epWuAu9:HmacSHA256:ib9oCC24Y4QvzHXHoOAoLRfZMp5cMpH+CPbNYwntk9A=', 'User-Agent': 'Onshape Python Sample App', 'Accept': 'application/vnd.onshape.v1+octet-stream'}
+21:50:467 | DEBUG | connect:request:1001 | Request URL: https://cad-aps1.onshape.com/modelexport?workspaceId=5dc6e1187c405df5f668c03b&microversion=84b41192f486cf5514bce1e0&format=STL&mode=binary&grouping=true&scale=1.0&units=meter&partIds=JQD&_m=906eee15&documentId=6f1cac2e0829bc5d028e9456&elementId=af0997a1303159a15d581b12
+21:50:469 | DEBUG | connect:_handle_redirect:1084 | Request redirected to: https://cad-aps1.onshape.com/modelexport?workspaceId=5dc6e1187c405df5f668c03b&microversion=84b41192f486cf5514bce1e0&format=STL&mode=binary&grouping=true&scale=1.0&units=meter&partIds=JHD&_m=906eee15&documentId=6f1cac2e0829bc5d028e9456&elementId=af0997a1303159a15d581b12
+21:50:469 | DEBUG | connect:make_nonce:124 | nonce created: 4QCrcbSy8CzpAFrFaPybX9w7I
+21:50:469 | DEBUG | connect:_make_auth:1146 | query: workspaceId=5dc6e1187c405df5f668c03b&microversion=84b41192f486cf5514bce1e0&format=STL&mode=binary&grouping=true&scale=1.0&units=meter&partIds=JHD&_m=906eee15&documentId=6f1cac2e0829bc5d028e9456&elementId=af0997a1303159a15d581b12, hmac_str: b'get\n4qcrcbsy8czpafrfapybx9w7i\nthu, 04 dec 2025 15:50:39 gmt\napplication/json\n/modelexport\nworkspaceid=5dc6e1187c405df5f668c03b&microversion=84b41192f486cf5514bce1e0&format=stl&mode=binary&grouping=true&scale=1.0&units=meter&partids=jhd&_m=906eee15&documentid=6f1cac2e0829bc5d028e9456&elementid=af0997a1303159a15d581b12\n', signature: b'D4/iMV2R0hT8Q2oY5+jBvQbr9mzan+1Z8vFs2644Yt4=', auth: On on_2DbHlHYJohsdc6epWuAu9:HmacSHA256:D4/iMV2R0hT8Q2oY5+jBvQbr9mzan+1Z8vFs2644Yt4=
+21:50:469 | DEBUG | connect:request:999 | Request body: None
+21:50:469 | DEBUG | connect:request:1000 | Request headers: {'Content-Type': 'application/json', 'Date': 'Thu, 04 Dec 2025 15:50:39 GMT', 'On-Nonce': '4QCrcbSy8CzpAFrFaPybX9w7I', 'Authorization': 'On on_2DbHlHYJohsdc6epWuAu9:HmacSHA256:D4/iMV2R0hT8Q2oY5+jBvQbr9mzan+1Z8vFs2644Yt4=', 'User-Agent': 'Onshape Python Sample App', 'Accept': 'application/vnd.onshape.v1+octet-stream'}
+21:50:469 | DEBUG | connect:request:1001 | Request URL: https://cad-aps1.onshape.com/modelexport?workspaceId=5dc6e1187c405df5f668c03b&microversion=84b41192f486cf5514bce1e0&format=STL&mode=binary&grouping=true&scale=1.0&units=meter&partIds=JHD&_m=906eee15&documentId=6f1cac2e0829bc5d028e9456&elementId=af0997a1303159a15d581b12
+21:50:004 | DEBUG | connect:download:1342 | Mesh file saved: ./meshes/Right_wheel_1.stl
+21:50:007 | DEBUG | connect:download:1342 | Mesh file saved: ./meshes/Left_wheel_1.stl
+21:50:008 | DEBUG | connect:download:1342 | Mesh file saved: ./meshes/Base_1.stl
+21:50:008 | INFO | robot:_download_assets:750 | All assets downloaded successfully.
+21:50:010 | INFO | base:save:130 | Robot model saved to /home/kheyal/dev/robotics/onshape_urdf/BB/BB.urdf
+21:50:010 | INFO | connect:_log_final_api_count:197 | Client session ended → Total API calls made: 9
+21:50:010 | INFO | config:save:287 | Saving session configuration to ORT.yaml

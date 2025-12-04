@@ -77,21 +77,6 @@ def action_rate_l2(env: ManagerBasedRLEnv) -> torch.Tensor:
     return torch.sum(torch.square(diff), dim=1)
 
 
-# 3. Joint Velocity Penalty
-def joint_vel_l2(env: ManagerBasedRLEnv, asset_cfg: SceneEntityCfg) -> torch.Tensor:
-    """
-    Penalize high speeds on the wheels.
-    Helps prevent the robot from accelerating infinitely.
-    """
-    asset: Articulation = env.scene[asset_cfg.name]
-    
-    # Get joint velocities
-    # Shape: (num_envs, num_joints)
-    j_vel = asset.data.joint_vel
-    
-    # Return squared sum of all joint velocities
-    return torch.sum(torch.square(j_vel), dim=1)
-
 # In mdp.py
 
 def track_lin_vel_xy_l2(env: ManagerBasedRLEnv, asset_cfg: SceneEntityCfg) -> torch.Tensor:

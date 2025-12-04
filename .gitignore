@@ -70,4 +70,4 @@ tests/
 # Docker history
 .isaac-lab-docker-history
 
-!balance_bot/**
+!BB/**

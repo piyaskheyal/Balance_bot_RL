@@ -74,15 +74,15 @@ class CommandsCfg:
     # we use the specific Config class provided by Isaac Lab.
     base_velocity = mdp.UniformVelocityCommandCfg(
         asset_name="robot",
-        resampling_time_range=(0.0, 5.0),
+        resampling_time_range=(15.0, 15.0),
         debug_vis=True,
         
         # The ranges are defined inside a nested "Ranges" class or dict
         ranges=mdp.UniformVelocityCommandCfg.Ranges(
-            lin_vel_x=(-1.0, 1.0), 
-            lin_vel_y=(0.0, 0.0),   # ZERO for two-wheeled robots
+            lin_vel_y=(-1.0, 1.0), 
+            lin_vel_x=(0.0, 0.0),   # ZERO for two-wheeled robots
             ang_vel_z=(-1.0, 1.0),
-            heading=(-3.14, 3.14),
+            heading=(-math.pi, math.pi),
         ),
     )
 
@@ -158,7 +158,7 @@ class EventCfg:
 class RewardsCfg:
     """Reward terms for the Balance Bot."""
 
-    # (1) Constant running reward
+    # # (1) Constant running reward
     alive = RewTerm(
         func=mdp.is_alive, 
         weight=1.0 # Increased slightly to encourage long episodes
@@ -168,7 +168,7 @@ class RewardsCfg:
     # We relax this slightly so the robot feels free to lean into the run.
     upright_penalty = RewTerm(
         func=mdp.root_tilt_l2, 
-        weight=-2.0, 
+        weight=-1.0, 
         params={"asset_cfg": SceneEntityCfg("robot")},
     )
 
@@ -176,7 +176,7 @@ class RewardsCfg:
     # Logic: If I command 1.0 m/s and you go 1.0 m/s, penalty is 0.
     velocity_tracking = RewTerm(
         func=mdp.track_lin_vel_xy_l2,
-        weight=-1.0, # Strong incentive to match speed
+        weight=-1.5, # Strong incentive to match speed
         params={"asset_cfg": SceneEntityCfg("robot")},
     )
     
@@ -189,10 +189,10 @@ class RewardsCfg:
     )
 
     # (5) Smoothness (Anti-Jitter)
-    action_rate = RewTerm(
-        func=mdp.action_rate_l2,
-        weight=-0.05, # Tuned down slightly to allow quick reactions
-    )
+    # action_rate = RewTerm(
+    #     func=mdp.action_rate_l2,
+    #     weight=-0.05, # Tuned down slightly to allow quick reactions
+    # )
 
 
 @configclass
